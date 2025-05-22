@@ -30,7 +30,7 @@ API Compass automatically scans web applications to detect API endpoints and gen
 ### Quick Installation
 
 1. Clone the repository:
-   git clone https://github.com/username/api-compass.git
+   git clone https://github.com/IdoAizenshtein/api-compass.git
    cd api-compass
 
 2. Install dependencies:
