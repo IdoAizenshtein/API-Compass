@@ -49,53 +49,46 @@ The project is organized into two main components:
 ### Setting Up the Backend
 
 1. Clone the repository:
-   ```bash
+
    git clone <repository-url>
    cd api-compass
-   ```
 
 2. Install backend dependencies:
-   ```bash
+
    cd backend
    npm install
-   ```
 
 3. Ensure Redis is running:
-   ```bash
+
    redis-server
-   ```
 
 4. Start the backend server:
-   ```bash
+
    # For development (single process)
    node index.js
    
    # For production (cluster mode)
    node server.js
-   ```
 
    The backend will be available at http://localhost:3000
 
 ### Setting Up the Frontend
 
 1. Install frontend dependencies:
-   ```bash
+
    cd frontend
    npm install
-   ```
 
 2. Start the frontend development server:
-   ```bash
+
    npm run dev
-   ```
 
    The frontend will be available at http://localhost:3001 (with Next.js & Turbopack)
 
 3. For production build:
-   ```bash
+
    npm run build
    npm run start
-   ```
 
 ## Usage Guide
 
@@ -126,21 +119,26 @@ The frontend provides convenient links to all documentation types.
 
 ### Backend Endpoints
 
-#### `POST /scan`
+#### POST /scan
 Scan a website for API endpoints.
 
 **Request Body:**
-json { "url": "[https://example.com](https://example.com)", "delay": 2000, "headful": false }
+
+{
+  "url": "https://example.com",
+  "delay": 2000,
+  "headful": false
+}
 
 **Response:** Array of detected API endpoints with request and response details.
 
-#### `GET /docs/openapi.json`
+#### GET /docs/openapi.json
 Get the OpenAPI specification of discovered endpoints.
 
-#### `GET /docs/markdown`
+#### GET /docs/markdown
 Get Markdown documentation of discovered endpoints.
 
-#### `ALL /proxy?target={targetUrl}`
+#### ALL /proxy?target={targetUrl}
 Proxy API requests to avoid CORS issues.
 
 ## Technologies Used
