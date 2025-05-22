@@ -1,218 +1,103 @@
-# API Compass
+# API Compass - Automated API Discovery and Documentation Tool
 
-Automatically discover, document, and test API endpoints with precision. API Compass scans web applications to generate comprehensive OpenAPI specifications and interactive documentation.
+API Compass is an open-source developer tool that automatically discovers, documents, and tests REST API endpoints. Built for API developers, testers, and documentation specialists, it helps you map and understand any web application's API surface without manual tracing.
 
-## Project Overview
+## What is API Compass?
 
-API Compass is a comprehensive full-stack application designed to automatically discover, document, and test API endpoints. It combines a powerful backend scanning engine with an intuitive frontend interface, allowing developers to quickly map out APIs and generate professional documentation with minimal effort.
+API Compass automatically scans web applications to detect API endpoints and generates comprehensive documentation in OpenAPI/Swagger format. It eliminates hours of manual API discovery and documentation work with a simple, automated workflow.
 
-## Key Features
+**Keywords**: API discovery tool, API documentation generator, Swagger generator, OpenAPI, REST API testing, API mapping, automated API detection, API scanner
 
-- **Automated API Discovery**: Scan websites to automatically detect and document API endpoints
-- **Documentation Generation**: Create OpenAPI/Swagger specifications and Markdown documentation
-- **Interactive Documentation**: Explore APIs through Swagger UI with testing capabilities
-- **High Performance**: Redis caching and Node.js clustering for optimal performance
-- **Security Focused**: Implements rate limiting, XSS protection, and Content Security Policy
-- **Developer Friendly**: Simple interface for scanning and viewing results
+### Key Features
+
+- **Automated API Discovery**: Intelligently detects API endpoints from any web application
+- **Interactive Documentation**: Generates Swagger UI with endpoint testing capabilities
+- **Markdown Documentation**: Creates detailed API reference documentation
+- **Normalized Endpoints**: Automatically identifies URL patterns and parameters
 - **API Proxy**: Built-in proxy functionality to avoid CORS issues during testing
+- **High Performance**: Redis caching and Node.js clustering for production deployments
+- **Security-Focused**: Implements rate limiting, XSS protection, and Content Security Policy
 
-## Project Structure
+## Getting Started
 
-The project is organized into two main components:
-
-### Backend (Node.js/Express)
-- **Core Modules**:
-  - `index.js`: Main Express server with API routes
-  - `scanner.js`: Puppeteer-based API scanning engine
-  - `swagger.js`: OpenAPI/Swagger specification generator
-  - `documentation.js`: Markdown documentation generator
-  - `redisClient.js`: Redis caching implementation
-  - `server.js`: Multi-core clustering for scalability
-  - `utils/normalizeUrl.js`: URL normalization utilities
-
-### Frontend (Next.js/React)
-- **Core Components**:
-  - `pages/index.js`: Main scanning interface with form controls and results display
-  - `pages/_app.js` & `pages/_document.js`: Next.js configuration
-  - `styles/`: CSS and styling with TailwindCSS support
-  - `public/`: Static assets
-
-## Prerequisites
+### Prerequisites
 
 - Node.js (v16+)
 - npm or yarn
 - Redis server
 - Modern web browser
 
-## Installation & Setup
-
-### Setting Up the Backend
+### Quick Installation
 
 1. Clone the repository:
-
-   git clone <repository-url>
+   git clone https://github.com/username/api-compass.git
    cd api-compass
 
-2. Install backend dependencies:
-
-   cd backend
+2. Install dependencies:
    npm install
 
-3. Ensure Redis is running:
+3. Start the application:
+   npm start
 
-   redis-server
+Visit http://localhost:3000 to access API Compass.
 
-4. Start the backend server:
+## Documentation
 
-   # For development (single process)
-   node index.js
-   
-   # For production (cluster mode)
-   node server.js
+### API Discovery Process
 
-   The backend will be available at http://localhost:3000
+API Compass works by:
 
-### Setting Up the Frontend
+1. Launching a headless browser to navigate target websites
+2. Capturing network requests to identify API endpoints
+3. Analyzing request/response patterns to determine API structure
+4. Generating normalized endpoint documentation with parameter detection
+5. Creating interactive Swagger UI for exploration and testing
 
-1. Install frontend dependencies:
+### Usage Examples
 
-   cd frontend
-   npm install
+Scanning a Single-Page Application:
 
-2. Start the frontend development server:
-
-   npm run dev
-
-   The frontend will be available at http://localhost:3001 (with Next.js & Turbopack)
-
-3. For production build:
-
-   npm run build
-   npm run start
-
-## Usage Guide
-
-### Scanning an API
-
-1. Open the frontend application in your browser
-2. Enter the target URL you want to scan in the input field
-3. Configure optional settings:
-   - **Headful Mode**: Toggle to see the browser during scanning (useful for debugging)
-   - **Delay**: Set milliseconds to wait after page load (allows dynamic content to load)
-4. Click "Start Scan"
-5. View the discovered endpoints in the results section
-
-### Accessing Documentation
-
-After scanning, you can access the generated documentation through:
-
-- **Swagger UI**: Interactive API documentation with testing capabilities
-  - URL: http://localhost:3000/docs
-- **OpenAPI JSON**: Raw OpenAPI specification
-  - URL: http://localhost:3000/docs/openapi.json
-- **Markdown**: Detailed Markdown documentation
-  - URL: http://localhost:3000/docs/markdown
-
-The frontend provides convenient links to all documentation types.
-
-## API Reference
-
-### Backend Endpoints
-
-#### POST /scan
-Scan a website for API endpoints.
-
-**Request Body:**
-
+POST /scan
 {
   "url": "https://example.com",
   "delay": 2000,
   "headful": false
 }
 
-**Response:** Array of detected API endpoints with request and response details.
+## Technology Stack
 
-#### GET /docs/openapi.json
-Get the OpenAPI specification of discovered endpoints.
-
-#### GET /docs/markdown
-Get Markdown documentation of discovered endpoints.
-
-#### ALL /proxy?target={targetUrl}
-Proxy API requests to avoid CORS issues.
-
-## Technologies Used
-
-### Backend
-- **Express.js**: Web framework for RESTful API
-- **Puppeteer**: Headless Chrome automation for scanning
-- **Redis/IoRedis**: In-memory data store
-- **Swagger UI**: Interactive API documentation
-- **Helmet**: Security middleware for HTTP headers
-- **XSS**: Input sanitization
-- **Node.js Cluster**: Process scaling
-
-### Frontend
-- **Next.js**: React framework with SSR support
-- **React**: UI library (v19.1.0)
-- **Axios**: HTTP client for API requests
-- **TailwindCSS**: Utility-first CSS framework
-- **Turbopack**: Fast bundling for development
-
-## Configuration Options
-
-### Backend Environment Variables
-- `PORT`: Server port (default: 3000)
-
-### Frontend Customization
-- Edit `next.config.mjs` for Next.js configuration
-- Modify TailwindCSS settings in `postcss.config.mjs` and `tailwind.config.js`
-
-## Security Features
-
-- **Rate Limiting**: Prevents abuse with request limits
-- **Content Security Policy**: Restricts resource loading to prevent attacks
-- **Input Sanitization**: XSS protection for all user inputs
-- **Error Handling**: Prevents leaking sensitive information
-- **Secure Middleware**: Uses Helmet for security headers
-
-## Performance Optimizations
-
-- **Redis Caching**: Improves response times by caching scan results
-- **Node.js Clustering**: Utilizes multiple CPU cores for parallel processing
-- **Next.js Optimization**: Frontend uses Turbopack for faster development
+- **Backend**: Node.js, Express, Puppeteer, Redis/IoRedis
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Documentation**: Swagger UI, OpenAPI 3.0
+- **Performance**: Node.js Clustering, Redis Caching
+- **Security**: Helmet, XSS Protection, Rate Limiting
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit pull requests.
+Contributions make the open-source community an amazing place to learn, inspire, and create. Any contributions to API Compass are greatly appreciated.
 
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
+## Related Tools and Comparisons
+
+- **API Compass vs. Postman**: API Compass automatically discovers endpoints, while Postman requires manual endpoint creation
+- **API Compass vs. Swagger Inspector**: More comprehensive discovery and persistent documentation
+- **API Compass vs. Manual Documentation**: Save hours of API documentation time with automated discovery
+
+## Use Cases
+
+- **API Development**: Quickly map existing APIs during development
+- **API Testing**: Automatically discover endpoints to test
+- **Documentation**: Generate up-to-date API documentation
+- **API Migration**: Document legacy APIs before modernization
+- **Security Audit**: Discover and review exposed API endpoints
 
 ## License
 
-This project is licensed under the ISC License.
+API Compass is licensed under the ISC License.
 
 ## Author
 
-Ido Aizenshtein
+Created by Ido Aizenshtein
 
-## Frontend Interface
+## SEO-Optimized Keywords
 
-The frontend provides an intuitive interface with:
-
-1. **URL Input Form**: Enter the target website to scan
-2. **Configuration Options**:
-   - Toggle headful mode for browser visibility
-   - Set delay duration for dynamic content
-3. **Results Display**: View discovered API endpoints with method badges
-4. **Documentation Links**: Easy access to Swagger UI, OpenAPI, and Markdown documentation
-
-The UI is built with React and styled using TailwindCSS for a clean, responsive experience.
-
----
-
-Powered by Node.js, Express, Puppeteer, Redis, Next.js, and React.
+API discovery, API documentation, Swagger UI, OpenAPI, API testing, API scanner, REST API, API development tools, API endpoints, API mapping, API visualization, API proxy, API catalog, API inventory, headless browser, web crawler, automatic API detection, API documentation generator, REST API documentation, API specification
